@@ -1,8 +1,14 @@
 package com.phonegap.hello_world;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +69,8 @@ public class MyService extends BackgroundService {
 		    }
 		};
 		
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener, getMainLooper());
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15000, 400f, locationListener, getMainLooper());
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 250f, locationListener);
 		locationInit = true;
 		
 		
@@ -88,6 +95,22 @@ public class MyService extends BackgroundService {
 			}
 		
 			result.put("Message", msg);
+			
+			String mySite = "http://winterfel.student.rit.edu/ian?=" + msg.replace(' ', '-') ;
+			Log.d(TAG,mySite);
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpPost httppost = new HttpPost(mySite);
+			
+			
+			try {
+				HttpResponse response = httpClient.execute(httppost);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			}
+		
+					
 
 			Log.d(TAG, msg);
 		} catch (JSONException e) {
