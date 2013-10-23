@@ -41,16 +41,10 @@ public class MyService extends BackgroundService {
 
 	protected void initLoc() {
 		Log.d(TAG,"init loc");
-		/*final Handler h = new Handler();
-		h.post(new Runnable() {
-			public void run() {
-				locationUpdates();
-				h.postDelayed(this, TIME)
-			}
-		})l */
 		
 		// Register the listener with the Location Manager to receive location updates
 		locationManager =  (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		
 		// Define a listener that responds to location updates
 		locationListener = new LocationListener() {
 		    public void onLocationChanged(Location location) {
