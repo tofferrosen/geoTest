@@ -51,7 +51,7 @@ public class MyService extends BackgroundService {
 				locationUpdates();
 				h.postDelayed(this, TIME)
 			}
-		})l */
+		}); */
 		
 		// Register the listener with the Location Manager to receive location updates
 		locationManager =  (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
