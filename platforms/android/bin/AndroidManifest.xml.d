@@ -1,2 +1,2 @@
-/Users/toffer/senior_project/geoTest/geoTest/platforms/android/bin/AndroidManifest.xml : \
-/Users/toffer/senior_project/geoTest/geoTest/platforms/android/AndroidManifest.xml \
+/Users/user/git/TourTrekPhoneGapMigration/platforms/android/bin/AndroidManifest.xml : \
+/Users/user/git/TourTrekPhoneGapMigration/platforms/android/AndroidManifest.xml \

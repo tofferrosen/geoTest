@@ -22,6 +22,8 @@ import android.util.Log;
 
 import com.red_folder.phonegap.plugin.backgroundservice.BackgroundService;
 
+import edu.rit.se.se561.trafficanalysis.tracking.*;
+
 public class MyService extends BackgroundService {
 	
 	private final static String TAG = MyService.class.getSimpleName();
@@ -30,6 +32,7 @@ public class MyService extends BackgroundService {
 	private Location loc = null;
 	private boolean locationInit = false;
 	private LocationListener locationListener = null;
+	private TrackingService trackingService = null;
 	
 	// Acquire a reference to the system Location Manager
 	LocationManager locationManager;
@@ -40,11 +43,19 @@ public class MyService extends BackgroundService {
 
 
 	protected void initLoc() {
-		Log.d(TAG,"init loc");
+
+		Log.d(TAG,"init loc: HelloWorld calling CycleOps");
+		/*final Handler h = new Handler();
+		h.post(new Runnable() {
+			public void run() {
+				locationUpdates();
+				h.postDelayed(this, TIME)
+			}
+		})l */
 		
 		// Register the listener with the Location Manager to receive location updates
 		locationManager =  (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		
+		/*
 		// Define a listener that responds to location updates
 		locationListener = new LocationListener() {
 		    public void onLocationChanged(Location location) {
@@ -65,6 +76,12 @@ public class MyService extends BackgroundService {
 		
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15000, 400f, locationListener, getMainLooper());
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 250f, locationListener);
+		 */
+		
+		locationListener = new TrackingService();
+		
+		TrackingService.startTracking(getApplicationContext());
+		
 		locationInit = true;
 		
 		

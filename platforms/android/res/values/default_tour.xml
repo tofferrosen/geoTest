@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- All values are strings in order to be able to store times in ms. -->
+    <!-- A unique persistent ID for the tour. These should not be reused across tours. -->
+    <string name="defaultConfigRaceId">FBBT-2013</string>
+    <!-- The name of the tour. -->
+    <string name="defaultConfigRaceName">Five Borough Bike Tour</string>
+    <!-- Official Organizer/Sponsor of the tour. -->
+    <string name="defaultConfigTourOwner">Bike New York</string>
+    <!-- Url to open if they click the tour logo. -->
+    <string name="defaultConfigTourUrl">http://www.bikenewyork.org/ride/five-boro-bike-tour/</string>
+    <!-- Logo to show while tracking. -->
+    <string name="defaultConfigTourLogo">http://www.bikenewyork.org/wp-content/uploads/2011/04/TD_FiveBoroBikeTour_vert_RGB-180x300.jpg</string>
+    <!-- DCS base installation path without trailing slash. -->
+    <string name="defaultConfigServerUrl">http://ec2-50-16-56-28.compute-1.amazonaws.com</string>
+    <!-- Google Cloud Messaging Sender ID (from Developer API Console) -->
+    <string name="defaultConfigGcmSenderId">741343817629</string>
+    <!-- Tour Start Time (ms since epoch) -->
+    <string name="defaultConfigRaceStartTime">1367751600000</string>
+    <!-- Maximum time from the start time to track users. (ms) -->
+    <string name="defaultConfigRaceMaxTime">36000000</string>
+</resources>
