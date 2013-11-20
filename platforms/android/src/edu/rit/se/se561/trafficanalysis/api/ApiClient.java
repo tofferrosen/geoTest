@@ -72,7 +72,7 @@ public class ApiClient {
 	 * @throws DcsException
 	 */
 	public RegisterRiderResponse register() throws DcsException {
-		String os = "Android " + Build.VERSION.RELEASE;
+		String os = "IanAndroid " + Build.VERSION.RELEASE;
 		String device = Build.PRODUCT + " (" + Build.DEVICE + ")";
 		String tourId = mTourConfig.getTourId();
 		RegisterRiderRequest data = new RegisterRiderRequest(os, device, tourId);

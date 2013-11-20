@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory>
+        <edu.rit.se.se561.trafficanalysis.ui.widget.SeekBarPreference
+            xmlns:tourtrak="http://edu.rit.se.se561.trafficanalysis/widgets/seekbar"
+            android:defaultValue="30"
+            android:key="low_battery_percent"
+            android:max="70"
+            android:persistent="true"
+            android:summary="@string/low_batt_percent_summary"
+            android:title="@string/low_batt_percent_title"
+            tourtrak:min="15"
+            tourtrak:unitsLeft=""
+            tourtrak:unitsRight="%" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

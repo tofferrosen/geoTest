@@ -120,8 +120,8 @@ public class TrackingService extends Service implements LocationListener {
 				(long) (TimingController.getLocationDeliveryDelay(this)
 				 * (Math.random() + 0.25)));
 
-		TourFinishReminderAlarm.setAlarm(this);
-		EndTrackingAlarm.setAlarm(this);
+//		TourFinishReminderAlarm.setAlarm(this);
+//		EndTrackingAlarm.setAlarm(this);
 	}
 
 	private void cancelAlarms() {
@@ -276,6 +276,7 @@ public class TrackingService extends Service implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		// NOT USED
+//		mStateBroadcaster.locationUpdate(location);
 	}
 	
 

@@ -9,7 +9,7 @@
     <!-- Time between requesting locations. -->
     <integer name="locationRequestDelayMs">75000</integer>
     <!-- Time between delivering locations to the server. -->
-    <integer name="locationDeliveryDelayMs">600000</integer>
+    <integer name="locationDeliveryDelayMs">150000</integer>
     <!-- Maximum number of locations to send to the server in one request. -->
     <integer name="locationDeliveryBatchSize">50</integer>
     

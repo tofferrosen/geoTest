@@ -22,23 +22,33 @@ import android.util.Log;
 
 import com.red_folder.phonegap.plugin.backgroundservice.BackgroundService;
 
+import edu.rit.se.se561.trafficanalysis.api.ApiClient;
+import edu.rit.se.se561.trafficanalysis.api.DcsException;
+import edu.rit.se.se561.trafficanalysis.api.Messages;
+import edu.rit.se.se561.trafficanalysis.api.Messages.RegisterRiderResponse;
 import edu.rit.se.se561.trafficanalysis.tracking.*;
+import edu.rit.se.se561.trafficanalysis.util.GCMHelper;
 
 public class MyService extends BackgroundService {
 	
 	private final static String TAG = MyService.class.getSimpleName();
 	
 	private String mHelloTo = "World";
-	private Location loc = null;
+//	private Location loc = null;
+	//Testing
+	private Messages.LocationUpdate loc = null;
+	
 	private boolean locationInit = false;
 	private LocationListener locationListener = null;
 	private TrackingService trackingService = null;
+	private LocationReceiver test = null;
+	private StateBroadcaster stateCaster= null;
 	
 	// Acquire a reference to the system Location Manager
 	LocationManager locationManager;
 	
 	protected void locationUpdates(){
-		
+		String lolwut = null;
 	}
 
 
@@ -54,7 +64,7 @@ public class MyService extends BackgroundService {
 		}); */
 		
 		// Register the listener with the Location Manager to receive location updates
-		locationManager =  (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+//		locationManager =  (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		/*
 		// Define a listener that responds to location updates
 		locationListener = new LocationListener() {
@@ -78,8 +88,20 @@ public class MyService extends BackgroundService {
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 250f, locationListener);
 		 */
 		
-		locationListener = new TrackingService();
+//		locationListener = new TrackingService();
+		trackingService = new TrackingService();
+		stateCaster = new StateBroadcaster(getApplicationContext());
+		test = new LocationReceiver();
 		
+		ApiClient apc = new ApiClient(getApplicationContext());
+		try {
+			RegisterRiderResponse rr = apc.register();
+			Log.d(getPackageName(), rr.toString());
+		} catch (DcsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		GCMHelper.registerPush(getApplicationContext());
 		TrackingService.startTracking(getApplicationContext());
 		
 		locationInit = true;
@@ -89,20 +111,27 @@ public class MyService extends BackgroundService {
 	@Override
 	protected synchronized JSONObject doWork() {
 		JSONObject result = new JSONObject();
+		LocationDBOpenHelper dbhelper = new LocationDBOpenHelper(getApplicationContext()); //Testing
 		
 		if(!locationInit){
 			initLoc();
 		}
 		
 		try {
+			//Testing
+			if(dbhelper.getLocations(1).size()>0) {
+				loc = dbhelper.getLocations(1).get(0);
+			}
+			
 			//SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
 			//String now = df.format(new Date(System.currentTimeMillis())); 
 			
 			String msg;
 			if(loc != null){
-				msg = "Lat " + loc.getLatitude() + " Long " +loc.getLongitude();
+//				msg = "Lat " + loc.getLatitude() + " Long " +loc.getLongitude();
+				msg = "Lat " + loc.latitude + " Long " +loc.longitude; //Testing
 			} else {
-				msg = "LOCATION IS NULL";
+				msg = "LOCATION IS NULL, LOL";
 			}
 		
 			result.put("Message", msg);
