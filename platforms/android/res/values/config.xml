@@ -7,9 +7,9 @@
     <integer name="startTrackingEarlyMs">1200000</integer>
     
     <!-- Time between requesting locations. -->
-    <integer name="locationRequestDelayMs">75000</integer>
+    <integer name="locationRequestDelayMs">74900</integer>
     <!-- Time between delivering locations to the server. -->
-    <integer name="locationDeliveryDelayMs">150000</integer>
+    <integer name="locationDeliveryDelayMs">75000</integer>
     <!-- Maximum number of locations to send to the server in one request. -->
     <integer name="locationDeliveryBatchSize">50</integer>
     
@@ -20,7 +20,7 @@
     <integer name="minAccuracyMeters">15</integer>
     <integer name="endRaceNotifAtPercent">50</integer>
     <integer name="tourReminderNotifDelayMs">3600000</integer>
-    <integer name="maxWaitSendLocsToDCSMs">360000</integer>
+    <integer name="maxWaitSendLocsToDCSMs">300000</integer>
     
     <!-- Battery/Timing Controller Values -->
     <!-- Our target battery usage per hour. -->

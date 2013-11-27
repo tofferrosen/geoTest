@@ -66,7 +66,7 @@ public final class R {
         public static final int confirm_new_register=0x7f06002c;
         public static final int confirm_new_register_overwrite=0x7f06002d;
         public static final int confirm_unregister=0x7f06004a;
-        /**  Google Cloud Messaging Sender ID (from Developer API Console) 
+        /**  Google Cloud Messaging Sender ID (from Developer API Console)  741343817629
          */
         public static final int defaultConfigGcmSenderId=0x7f060006;
         /**  All values are strings in order to be able to store times in ms. 

@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,6 +23,10 @@ import android.util.Log;
 
 import com.red_folder.phonegap.plugin.backgroundservice.BackgroundService;
 
+import com.phonegap.hello_world.BuildConfig;
+import com.phonegap.hello_world.R;
+import edu.rit.se.se561.trafficanalysis.TourConfig;
+import edu.rit.se.se561.trafficanalysis.TourConfig.TourConfigData;
 import edu.rit.se.se561.trafficanalysis.api.ApiClient;
 import edu.rit.se.se561.trafficanalysis.api.DcsException;
 import edu.rit.se.se561.trafficanalysis.api.Messages;
@@ -32,6 +37,7 @@ import edu.rit.se.se561.trafficanalysis.util.GCMHelper;
 public class MyService extends BackgroundService {
 	
 	private final static String TAG = MyService.class.getSimpleName();
+	private final static String DCS_URL = "http://devcycle.se.rit.edu/";
 	
 	private String mHelloTo = "World";
 //	private Location loc = null;
@@ -87,6 +93,11 @@ public class MyService extends BackgroundService {
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15000, 400f, locationListener, getMainLooper());
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 250f, locationListener);
 		 */
+		
+		//Set up the default config for sharedprefs.
+		TourConfig cfg = new TourConfig(this);
+		setupDefaultConfig(cfg);
+		
 		
 //		locationListener = new TrackingService();
 		trackingService = new TrackingService();
@@ -200,4 +211,31 @@ public class MyService extends BackgroundService {
 	}
 
 
+	public void setupDefaultConfig(TourConfig cfg) {
+		if (!cfg.isTourConfigured()) {
+			TourConfigData tour = new TourConfigData();
+			
+			Resources res = getResources();
+
+			tour.tour_id = res.getString(R.string.defaultConfigRaceId);
+			tour.tour_name = res.getString(R.string.defaultConfigRaceName);
+			tour.tour_organization = res.getString(R.string.defaultConfigTourOwner);
+			tour.tour_logo = res.getString(R.string.defaultConfigTourLogo);
+			tour.tour_url = res.getString(R.string.defaultConfigTourUrl);
+			tour.dcs_url = res.getString(R.string.defaultConfigServerUrl);
+			tour.gcm_sender_id = res.getString(R.string.defaultConfigGcmSenderId);
+			if (BuildConfig.DEBUG) {
+				tour.dcs_url = DCS_URL;
+				tour.start_time = System.currentTimeMillis() + 60000 * 3;
+				tour.max_tour_time = 30000000;
+			} else {
+				tour.start_time = Long.parseLong(res.getString(
+								R.string.defaultConfigRaceStartTime));
+				tour.max_tour_time = Long.parseLong(res.getString(
+								R.string.defaultConfigRaceMaxTime));
+			}
+
+			cfg.setNewTourConfig(tour);
+		}
+	}
 }
