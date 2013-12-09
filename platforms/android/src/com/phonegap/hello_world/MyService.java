@@ -106,8 +106,15 @@ public class MyService extends BackgroundService {
 		
 		ApiClient apc = new ApiClient(getApplicationContext());
 		try {
-			RegisterRiderResponse rr = apc.register();
-			Log.d(getPackageName(), rr.toString());
+			RegisterRiderResponse riderResponse = apc.register();
+			//Begin Ian's Hardcoding time.
+			cfg.setRiderId(riderResponse.getRiderId());
+//			boolean success = new ApiClient(this).registerPushId(cfg.HARDCODED_PUSH_ID);
+//			if (success) {
+//				new TourConfig(this).setGcmPushId(cfg.HARDCODED_PUSH_ID);
+//			}
+			//End Ian's Hardcoding time.
+			Log.d(getPackageName(), riderResponse.toString());
 		} catch (DcsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -201,13 +208,13 @@ public class MyService extends BackgroundService {
 	@Override
 	protected void onTimerEnabled() {
 		// TODO Auto-generated method stub
-		
+		TrackingService.startTracking(getApplicationContext());
 	}
 
 	@Override
 	protected void onTimerDisabled() {
 		// TODO Auto-generated method stub
-		
+		TrackingService.pauseTracking(getApplicationContext());
 	}
 
 

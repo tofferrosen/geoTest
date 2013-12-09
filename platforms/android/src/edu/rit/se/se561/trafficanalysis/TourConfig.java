@@ -6,6 +6,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 public class TourConfig {
+	//Begin Ian's Hardcoding time.
+	public static final String HARDCODED_PUSH_ID = "APA91bHzBb_mrysg-EKvJkWp6GdjJj5XUMmy7zzho70AXLYNIzkrXhEnPHzn2shTza9sSg8Ylxp0C0a13ykMMJl77YUudFnJz9sDSeN05GttpaXG1nV68s5m1t3vZIqL57Wd7ZaIjmb1UYbuq48H-T5_hxYeZynrpHF3CFOPQcIw3pR7x-lciG8";
+	//public static final String HARDCODED_RIDER_ID = "TcH4FR09ROSA4b42WJX6i55dAJN32K5ia1RXo0yEZHI\u003d\n";
+	//End Ian's Hardcoding time.
+	
+	
 	public static final String PREF_NAME = "TourConfig";
 
 	/**
@@ -238,6 +244,10 @@ public class TourConfig {
 	 * The rider id provided by the DCS.
 	 */
 	public String getRiderId() {
+		//Begin Ian's Hardcoding time.
+//		return HARDCODED_RIDER_ID;
+		//End Ian's Hardcoding time.
+		
 		return mSharedPrefs.getString(KEY_RIDER_ID, null);
 	}
 
